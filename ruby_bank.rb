@@ -1,7 +1,29 @@
-balance = 3000.00
+$balance = 3000.00
 
-puts "Your balance is #{balance}."
+puts "Your balance is #{$balance}."
 continue = "y"
+
+def withdraw 
+	puts "How much would you like to withdraw: "
+	num = gets.chomp.to_f.round(2)
+	if num <= $balance
+		$balance -= num
+		puts "New Balance: #{$balance}"
+	else
+		puts "Insufficient Funds. Please try again."
+	end
+end
+
+def deposit
+	puts "How much would you like to deposit: "
+	num = gets.chomp.to_f.round(2)
+	$balance += num
+	puts "New Balance: #{$balance}"
+end
+
+def balance
+	puts "$Balance: #{$balance}"
+end
 
 while continue == "y" do
 	puts "Would you like to (W)ithdraw, (D)eposit, or (C)heck_balance? "
@@ -9,21 +31,13 @@ while continue == "y" do
 
 	case selection
 	when "w"
-		puts "How much would you like to withdraw: "
-		num = gets.chomp.to_f.round(2)
-		if num <= balance
-			balance -= num
-			puts "New Balance: #{balance}"
-		else
-			puts "Insufficient Funds. Please try again."
-		end
+		withdraw
 	when 'd'
-		puts "How much would you like to deposit: "
-		num = gets.chomp.to_f.round(2)
-		balance += num
-		puts "New Balance: #{balance}"
+		deposit
 	when 'c'
-		puts "Balance: #{balance}"
+		balance
+	else 
+		puts "Pick a valid choice!"
 	end
 
 	puts "Do you have more transactions? (y)es or (n)o: "
